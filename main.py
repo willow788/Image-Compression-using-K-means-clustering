@@ -107,13 +107,7 @@ if __name__ == "__main__":
     compressed_size = clusters * img.shape[2] + points.shape[0]
     print("Size of the compressed image: ", compressed_size)
 
-    #plotting a matric table to show the size of the original and compressed image
-    plt.figure(figsize=(6, 4))
-    plt.axis('off')
-    plt.table(cellText=[["Original Image", size_of_image], ["Compressed Image", compressed_size]],
-              colLabels=["Image Type", "Size (in bytes)"],
-              cellLoc='center', loc='center')
-    plt.show()
+    
     
     
 
