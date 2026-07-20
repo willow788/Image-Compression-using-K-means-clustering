@@ -71,13 +71,22 @@ def compress_image(means, index_values, image):
 
     recovered = recovered.reshape(image.shape)
 
-    #plotting the recovered image
-    plt.imshow(recovered)
-    plt.axis('off')
-    plt.show()
+    #plotting the original and recovered image side by side
+    fig, axes = plt.subplots(1, 2, squeeze=True, figsize=(12, 6))
+    axes[0].imshow(image)
+    axes[0].set_title('Original Image')
+    axes[0].axis('off')
+
+    axes[1].imshow(np.clip(recovered, 0, 1))
+    axes[1].set_title('Compressed Image')
+    axes[1].axis('off')
+
+    fig.tight_layout()
+    fig.savefig('compressed_image_preview.png', bbox_inches='tight')
+    plt.show(block=True)
 
     #saving the recovered image
-    plt.imsave('compressed_image.jpg', recovered)
+    plt.imsave('compressed_image.jpg', np.clip(recovered, 0, 1))
 
 
 #driver code
@@ -97,6 +106,17 @@ if __name__ == "__main__":
     print("Size of the original image: ", size_of_image)
     compressed_size = clusters * img.shape[2] + points.shape[0]
     print("Size of the compressed image: ", compressed_size)
+
+    #plotting a matric table to show the size of the original and compressed image
+    plt.figure(figsize=(6, 4))
+    plt.axis('off')
+    plt.table(cellText=[["Original Image", size_of_image], ["Compressed Image", compressed_size]],
+              colLabels=["Image Type", "Size (in bytes)"],
+              cellLoc='center', loc='center')
+    plt.show()
     
+    
+
+
     
     
