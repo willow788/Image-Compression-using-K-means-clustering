@@ -92,4 +92,11 @@ if __name__ == "__main__":
     means, points = initialize_means(img, clusters)
     means, index_values = k_means(points, means, clusters)
     compress_image(means, index_values, img)
+
+    size_of_image = img.shape[0] * img.shape[1] * img.shape[2]
+    print("Size of the original image: ", size_of_image)
+    compressed_size = clusters * img.shape[2] + points.shape[0]
+    print("Size of the compressed image: ", compressed_size)
+    
+    
     
